@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core'
 import { User } from 'src/models/user.model'
 import userData from 'src/assets/users.json'
 
@@ -17,12 +17,25 @@ export class UserComponent implements OnInit {
   tableIsVisible: boolean = true
   searchValue: string
   newUser: Object = {name: '', email: ''}
+  
+  @Input() user: Object
+  @Input() userIsLoaded: boolean
+  @Output() onLoadUsers: EventEmitter<User[]> = new EventEmitter<User[]>()
+  @Output() onLogout: EventEmitter<any> = new EventEmitter<any>()
 
   constructor () {
-    console.log('this.newUser', this.newUser)
   }
 
   ngOnInit () {
+    this.loadUsers()
+  }
+
+  loadUsers () {
+    this.onLoadUsers.emit(this.users)
+  }
+
+  logout () {
+    this.onLogout.emit()
   }
 
   toggleTable () {

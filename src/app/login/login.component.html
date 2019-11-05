@@ -1,0 +1,10 @@
+<div>
+  <div class="login-form" *ngIf="!userIsLoaded">
+    <form>
+      <input type="text" [(ngModel)]="userForm.name" [ngModelOptions]="{standalone: true}">
+      <input type="password" [(ngModel)]="userForm.password" [ngModelOptions]="{standalone: true}">
+      <button (click)="onSubmitted()">Submit</button>
+    </form>
+  </div>
+  <user [user]="user" [userIsLoaded]="userIsLoaded" (onLoadUsers)="usersLoaded($event)" (onLogout)="logout()"></user>
+</div>
