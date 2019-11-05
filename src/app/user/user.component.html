@@ -1,0 +1,16 @@
+<h3>Users</h3>
+<button (click)="toggleTable()">{{ tableIsVisible ? 'Hide' : 'Show'}} Table</button>
+<h4>Filtrar por: {{ searchValue }}</h4>
+<input type="text" [(ngModel)]="searchValue" (change)="onChanged(searchValue)">
+<table *ngIf="tableIsVisible">
+  <thead>
+    <th>Id</th>
+    <th>Name</th>
+    <th>Email</th>
+  </thead>
+  <tr *ngFor="let user of users">
+    <td>{{ user.id }}</td>
+    <td>{{ user.name }}</td>
+    <td>{{ user.email }}</td>
+  </tr>
+</table>

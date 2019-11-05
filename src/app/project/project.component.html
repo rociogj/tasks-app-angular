@@ -1,0 +1,13 @@
+<h3>Projects</h3>
+<table *ngIf="projects.length">
+  <thead>
+    <th>Id</th>
+    <th>Name</th>
+    <th>Date</th>
+  </thead>
+  <tr *ngFor="let project of projects">
+    <td>{{ project.pid }}</td>
+    <td>{{ project.name }}</td>
+    <td>{{ project.date }}</td>
+  </tr>
+</table>
