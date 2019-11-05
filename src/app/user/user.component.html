@@ -1,16 +1,28 @@
 <h3>Users</h3>
 <button (click)="toggleTable()">{{ tableIsVisible ? 'Hide' : 'Show'}} Table</button>
-<h4>Filtrar por: {{ searchValue }}</h4>
-<input type="text" [(ngModel)]="searchValue" (change)="onChanged(searchValue)">
+<div>
+  <span>Filtrar por: </span>
+  <input type="text" [(ngModel)]="searchValue" (change)="filterTable()">
+</div>
+
+<form>
+  <input type="text" [(ngModel)]="newUser.name" [ngModelOptions]="{standalone: true}">
+  <input type="text" [(ngModel)]="newUser.email" [ngModelOptions]="{standalone: true}">
+  <button (click)="addItem(newUser)">Add</button>
+</form>
 <table *ngIf="tableIsVisible">
   <thead>
     <th>Id</th>
     <th>Name</th>
     <th>Email</th>
+    <th></th>
   </thead>
   <tr *ngFor="let user of users">
     <td>{{ user.id }}</td>
     <td>{{ user.name }}</td>
     <td>{{ user.email }}</td>
+    <td>
+      <button class="button--text" (click)="removeItem(user)">x</button>
+    </td>
   </tr>
 </table>

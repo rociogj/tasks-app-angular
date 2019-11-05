@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core'
 import { User } from 'src/models/user.model'
 import userData from 'src/assets/users.json'
-import { ThrowStmt } from '@angular/compiler'
+
+interface newUser {
+  name: String
+  email: String
+}
 
 @Component({
   selector: 'user',
@@ -12,9 +16,10 @@ export class UserComponent implements OnInit {
   users: User[] = userData
   tableIsVisible: boolean = true
   searchValue: string
+  newUser: Object = {name: '', email: ''}
 
   constructor () {
-    console.log('this.searchValue', this.searchValue)
+    console.log('this.newUser', this.newUser)
   }
 
   ngOnInit () {
@@ -24,11 +29,17 @@ export class UserComponent implements OnInit {
     this.tableIsVisible = !this.tableIsVisible
   }
 
-  onChanged () {
-    this.filterTable()
-  }
-
   filterTable () {
     this.users = this.searchValue ? userData.filter(user => user.name.toLowerCase().includes(this.searchValue)) : userData
+  }
+
+  removeItem (user: any) {
+    const userIndex = this.users.indexOf(user)
+    this.users.splice(userIndex, 1)
+  }
+
+  addItem (user: any) {
+    const newUser = {...user, id: this.users.length + 1, password: ''}
+    this.users.push(newUser)
   }
 }
