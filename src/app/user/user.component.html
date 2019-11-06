@@ -1,4 +1,4 @@
-<div>
+<div *ngIf="userIsLoaded">
   <h2>Users</h2>
 
   <button (click)="logout()">Logout</button>
@@ -9,10 +9,10 @@
     <input type="text" [(ngModel)]="searchValue">
   </div>
   
-  <form *ngIf="newUser">
-    <input type="text" [(ngModel)]="newUser.name" [ngModelOptions]="{standalone: true}">
-    <input type="text" [(ngModel)]="newUser.email" [ngModelOptions]="{standalone: true}">
-    <button (click)="addItem(newUser)">Add</button>
+  <form>
+    <input type="text" #name>
+    <input type="text" #email>
+    <button (click)="addItem(name.value, email.value)">Add</button>
   </form>
   <table *ngIf="tableIsVisible">
     <thead>

@@ -16,8 +16,7 @@ interface newUser {
 export class UserComponent implements OnInit {
   @Input() users: User[]
   tableIsVisible: boolean = true
-  searchValue: string
-  newUser: User
+  searchValue: string = ''
   
   @Input() user: Object
   @Input() userIsLoaded: boolean
@@ -48,8 +47,8 @@ export class UserComponent implements OnInit {
     this.users.splice(userIndex, 1)
   }
 
-  addItem (user: any) {
-    const newUser = {...user, id: userData.length + 1, password: ''}
+  addItem (userName: string, userEmail: string) {
+    const newUser : any = {name: userName, email: userEmail, id: userData.length + 1, password: ''}
     this.users.push(newUser)
   }
 }

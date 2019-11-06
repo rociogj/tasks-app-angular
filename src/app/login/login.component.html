@@ -1,6 +1,6 @@
 <div>
-  <h2>Login</h2>
-  <div class="login-form">
+  <div class="login-form" *ngIf="!userIsLoaded">
+    <h2>Login</h2>
     <form>
       <input type="text" [(ngModel)]="userForm.name" [ngModelOptions]="{standalone: true}">
       <input type="password" [(ngModel)]="userForm.password" [ngModelOptions]="{standalone: true}">
@@ -8,5 +8,5 @@
     </form>
     <p *ngIf="showMessage" [class]="userIsLoaded ? 'login-message--success login-message' : 'login-message--error login-message'">{{ userIsLoaded ? successMessage : errorMessage }}</p>
   </div>
-  <!--<user [user]="user" [userIsLoaded]="userIsLoaded" (onLoadUsers)="usersLoaded($event)" (onLogout)="logout()"></user>-->
+  <user [user]="user" [userIsLoaded]="userIsLoaded" (onLoadUsers)="usersLoaded($event)" (onLogout)="logout()"></user>
 </div>
