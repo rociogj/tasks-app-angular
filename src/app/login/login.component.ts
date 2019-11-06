@@ -18,7 +18,6 @@ export class LoginComponent implements OnInit {
   }
 
   usersLoaded (users: User[]) {
-    console.log('users', users)
     this.users = users
   }
 
@@ -37,7 +36,6 @@ export class LoginComponent implements OnInit {
     if (this.users.some(u => u.name === form.name && u.password === form.password)) {
       this.user = this.userForm
       this.userIsLoaded = true
-      console.log('submit', this.user)
     } else {
       this.userIsLoaded = false
     }

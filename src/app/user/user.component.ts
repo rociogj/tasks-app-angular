@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core'
+import { Component, OnInit, OnChanges, Input, Output, EventEmitter } from '@angular/core'
 import { User } from 'src/models/user.model'
 import userData from 'src/assets/users.json'
 
@@ -13,7 +13,7 @@ interface newUser {
   styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit {
-  users: User[] = userData
+  @Input() users: User[] = userData
   tableIsVisible: boolean = true
   searchValue: string
   newUser: Object = {name: '', email: ''}
@@ -27,10 +27,9 @@ export class UserComponent implements OnInit {
   }
 
   ngOnInit () {
-    this.loadUsers()
   }
 
-  loadUsers () {
+  ngOnChanges () {
     this.onLoadUsers.emit(this.users)
   }
 
@@ -42,17 +41,13 @@ export class UserComponent implements OnInit {
     this.tableIsVisible = !this.tableIsVisible
   }
 
-  filterTable () {
-    this.users = this.searchValue ? userData.filter(user => user.name.toLowerCase().includes(this.searchValue)) : userData
-  }
-
   removeItem (user: any) {
     const userIndex = this.users.indexOf(user)
     this.users.splice(userIndex, 1)
   }
 
   addItem (user: any) {
-    const newUser = {...user, id: this.users.length + 1, password: ''}
+    const newUser = {...user, id: userData.length + 1, password: ''}
     this.users.push(newUser)
   }
 }

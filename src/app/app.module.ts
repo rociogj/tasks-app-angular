@@ -7,7 +7,7 @@ import { UserComponent } from './user/user.component'
 import { TaskComponent } from './task/task.component'
 import { ProjectComponent } from './project/project.component';
 import { LoginComponent } from './login/login.component';
-import { TableFilterPipe } from './table-filter.pipe'
+import { TableFilterPipe } from '../pipes/table-filter.pipe'
 
 @NgModule({
   declarations: [
