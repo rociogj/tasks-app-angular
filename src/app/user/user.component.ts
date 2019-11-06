@@ -1,6 +1,7 @@
 import { Component, OnInit, OnChanges, Input, Output, EventEmitter } from '@angular/core'
 import { User } from 'src/models/user.model'
 import userData from 'src/assets/users.json'
+import { UsersService } from 'src/services/users.service'
 
 interface newUser {
   name: String
@@ -13,7 +14,7 @@ interface newUser {
   styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit {
-  @Input() users: User[] = userData
+  @Input() users: User[]
   tableIsVisible: boolean = true
   searchValue: string
   newUser: Object = {name: '', email: ''}
@@ -23,10 +24,11 @@ export class UserComponent implements OnInit {
   @Output() onLoadUsers: EventEmitter<User[]> = new EventEmitter<User[]>()
   @Output() onLogout: EventEmitter<any> = new EventEmitter<any>()
 
-  constructor () {
+  constructor (public UsersService: UsersService) {
   }
 
   ngOnInit () {
+    this.users = this.UsersService.getUsers()
   }
 
   ngOnChanges () {

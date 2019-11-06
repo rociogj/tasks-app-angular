@@ -1,0 +1,22 @@
+.login-form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: auto;
+  max-width: 500px;
+}
+.login-message {
+  font-size: 11px;
+  padding: 10px 16px;
+  border-radius: 4px;
+}
+.login-message--success {
+  color: seagreen;
+  background-color: lightgreen;
+  border: 1px solid seagreen;
+}
+.login-message--error {
+  color: crimson;
+  background-color: lightpink;
+  border: 1px solid crimson;
+}

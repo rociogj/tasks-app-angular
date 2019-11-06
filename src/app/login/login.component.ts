@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { User } from 'src/models/user.model'
+import { LoginService } from 'src/services/login.service'
 
 @Component({
   selector: 'login',
@@ -11,8 +12,11 @@ export class LoginComponent implements OnInit {
   user: Object = {}
   userIsLoaded: boolean = false
   users: User[]
+  showMessage: boolean = false
+  errorMessage: String = 'Invalid user/password'
+  successMessage: String = 'Login succeded!'
 
-  constructor() { }
+  constructor(public LoginService: LoginService) { }
 
   ngOnInit() {
   }
@@ -24,6 +28,7 @@ export class LoginComponent implements OnInit {
   logout () {
     this.resetUser()
     this.userIsLoaded = false
+    this.showMessage = false
   }
 
   resetUser () {
@@ -33,12 +38,9 @@ export class LoginComponent implements OnInit {
   onSubmitted () {
     this.resetUser()
     const form: any = this.userForm
-    if (this.users.some(u => u.name === form.name && u.password === form.password)) {
-      this.user = this.userForm
-      this.userIsLoaded = true
-    } else {
-      this.userIsLoaded = false
-    }
+    this.showMessage = true
+    this.userIsLoaded = this.LoginService.login(form)
+    this.user = form
   }
 
 }
