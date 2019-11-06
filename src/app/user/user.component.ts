@@ -17,7 +17,7 @@ export class UserComponent implements OnInit {
   @Input() users: User[]
   tableIsVisible: boolean = true
   searchValue: string
-  newUser: Object = {name: '', email: ''}
+  newUser: User
   
   @Input() user: Object
   @Input() userIsLoaded: boolean
