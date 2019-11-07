@@ -1,9 +1,9 @@
 <div>
   <div class="login-form" *ngIf="!userIsLoaded">
     <h2>Login</h2>
-    <form>
-      <input type="text" [(ngModel)]="userForm.name" [ngModelOptions]="{standalone: true}">
-      <input type="password" [(ngModel)]="userForm.password" [ngModelOptions]="{standalone: true}">
+    <form [formGroup]="userForm">
+      <input type="text" formControlName="name">
+      <input type="password" formControlName="password">
       <button (click)="onSubmitted()">Submit</button>
     </form>
     <p *ngIf="showMessage" [class]="userIsLoaded ? 'login-message--success login-message' : 'login-message--error login-message'">{{ userIsLoaded ? successMessage : errorMessage }}</p>

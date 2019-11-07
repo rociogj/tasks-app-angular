@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { FormGroup, FormControl } from '@angular/forms'
 import { User } from 'src/models/user.model'
 import { LoginService } from 'src/services/login.service'
 
@@ -8,7 +9,7 @@ import { LoginService } from 'src/services/login.service'
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  userForm: Object = {name: '', password: ''}
+  userForm: FormGroup
   user: Object = {}
   userIsLoaded: boolean = false
   users: User[]
@@ -19,6 +20,10 @@ export class LoginComponent implements OnInit {
   constructor(public LoginService: LoginService) { }
 
   ngOnInit() {
+    this.userForm = new FormGroup({
+      name: new FormControl(),
+      password: new FormControl()
+    })
   }
 
   usersLoaded (users: User[]) {
@@ -37,7 +42,8 @@ export class LoginComponent implements OnInit {
 
   onSubmitted () {
     this.resetUser()
-    const form: any = this.userForm
+    const form: User = this.userForm.value
+    console.log('form', form)
     this.showMessage = true
     this.userIsLoaded = this.LoginService.login(form)
     this.user = form

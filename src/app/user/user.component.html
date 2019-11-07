@@ -6,13 +6,13 @@
   <button (click)="toggleTable()">{{ tableIsVisible ? 'Hide' : 'Show'}} Table</button>
   <div>
     <span>Filtrar por: </span>
-    <input type="text" [(ngModel)]="searchValue">
+    <input type="text" [formControl]="searchForm">
   </div>
   
   <form [formGroup]="newUser">
     <input type="text" formControlName="name">
     <input type="text" formControlName="email">
-    <button (click)="addItem(newUser.name, newUser.email)">Add</button>
+    <button (click)="addItem()">Add</button>
   </form>
   <table *ngIf="tableIsVisible">
     <thead>
@@ -21,7 +21,7 @@
       <th>Email</th>
       <th></th>
     </thead>
-    <tr *ngFor="let user of users | tableFilter:searchValue">
+    <tr *ngFor="let user of users | tableFilter:searchForm.value">
       <td>{{ user.id }}</td>
       <td>{{ user.name }}</td>
       <td>{{ user.email }}</td>
