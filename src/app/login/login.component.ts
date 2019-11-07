@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms'
+import { FormGroup, FormControl, Validators } from '@angular/forms'
 import { User } from 'src/models/user.model'
 import { LoginService } from 'src/services/login.service'
 
@@ -21,8 +21,8 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.userForm = new FormGroup({
-      name: new FormControl(),
-      password: new FormControl()
+      name: new FormControl('', Validators.required),
+      password: new FormControl('', [Validators.required, Validators.minLength(4)])
     })
   }
 
@@ -37,16 +37,17 @@ export class LoginComponent implements OnInit {
   }
 
   resetUser () {
-    this.user = {}
+    this.userForm.reset()
   }
 
   onSubmitted () {
-    this.resetUser()
-    const form: User = this.userForm.value
-    console.log('form', form)
+    console.log('this.userForm', this.userForm)
     this.showMessage = true
+    if (!this.userForm.valid) return
+    const form: User = this.userForm.value
     this.userIsLoaded = this.LoginService.login(form)
     this.user = form
+    this.resetUser()
   }
 
 }
