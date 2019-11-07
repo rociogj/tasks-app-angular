@@ -1,4 +1,5 @@
 import { Component, OnInit, OnChanges, Input, Output, EventEmitter } from '@angular/core'
+import { FormGroup, FormControl } from '@angular/forms'
 import { User } from 'src/models/user.model'
 import userData from 'src/assets/users.json'
 import { UsersService } from 'src/services/users.service'
@@ -17,6 +18,7 @@ export class UserComponent implements OnInit {
   @Input() users: User[]
   tableIsVisible: boolean = true
   searchValue: string = ''
+  newUser: FormGroup
   
   @Input() user: Object
   @Input() userIsLoaded: boolean
@@ -28,6 +30,11 @@ export class UserComponent implements OnInit {
 
   ngOnInit () {
     this.users = this.UsersService.getUsers()
+
+    this.newUser = new FormGroup({
+      name: new FormControl(),
+      email: new FormControl()
+    })
   }
 
   ngOnChanges () {

@@ -5,9 +5,11 @@ import { TaskComponent } from './task/task.component'
 import { ProjectComponent } from './project/project.component'
 
 const routes: Routes = [
-  {path: '', component: HomeComponent},
+  {path: '', component: HomeComponent, pathMatch: 'full'},
   {path: 'tasks', component: TaskComponent},
-  {path: 'projects', component: ProjectComponent},
+  {path: 'projects', component: ProjectComponent, children: [
+    {path: ':id', component: LoginComponent}
+  ]},
   {path: 'login', component: LoginComponent}
 ]
 

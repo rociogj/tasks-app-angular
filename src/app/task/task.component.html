@@ -1,13 +1,15 @@
-<h2>Tasks</h2>
-<table *ngIf="tasks.length">
-  <thead>
-    <th>Id</th>
-    <th>Time</th>
-    <th>Project</th>
-  </thead>
-  <tr *ngFor="let task of tasks">
-    <td>{{ task.tid }}</td>
-    <td>{{ task.time }}</td>
-    <td>{{ task.project }}</td>
-  </tr>
-</table>
+<div>
+  <h2>Tasks</h2>
+  <table *ngIf="tasks.length">
+    <thead>
+      <th>Id</th>
+      <th>Time</th>
+      <th>Project</th>
+    </thead>
+    <tr *ngFor="let task of tasks">
+      <td>{{ task.tid }}</td>
+      <td>{{ task.time }}</td>
+      <td>{{ task.project }}</td>
+    </tr>
+  </table>
+</div>

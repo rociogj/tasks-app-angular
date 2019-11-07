@@ -9,10 +9,10 @@
     <input type="text" [(ngModel)]="searchValue">
   </div>
   
-  <form>
-    <input type="text" #name>
-    <input type="text" #email>
-    <button (click)="addItem(name.value, email.value)">Add</button>
+  <form [formGroup]="newUser">
+    <input type="text" formControlName="name">
+    <input type="text" formControlName="email">
+    <button (click)="addItem(newUser.name, newUser.email)">Add</button>
   </form>
   <table *ngIf="tableIsVisible">
     <thead>

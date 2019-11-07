@@ -19,7 +19,7 @@
   display: block;
   padding: 10px;
 }
-.header-nav-item a:hover {
+.header-nav-item a:hover, .header-nav-item a.active {
   color: khaki;
   background-color: darkolivegreen;
 }
