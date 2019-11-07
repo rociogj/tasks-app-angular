@@ -1,12 +1,20 @@
 <div>
-  <div class="login-form" *ngIf="!userIsLoaded">
+  <div *ngIf="!userIsLoaded">
     <h2>Login</h2>
-    <form [formGroup]="userForm" (ngSubmit)="onSubmitted()">
-      <input type="text" formControlName="name">
-      <input type="password" formControlName="password">
-      <button type="submit">Submit</button>
-    </form>
-    <p *ngIf="(userForm.touched && !userForm.valid && showMessage) || (userForm.pristine && showMessage)" [class]="userForm.valid && userIsLoaded ? 'login-message--success login-message' : 'login-message--error login-message'">{{ userForm.valid && userIsLoaded ? successMessage : errorMessage }}</p>
+    <div class="login-form">
+      <form [formGroup]="userForm" (ngSubmit)="onSubmitted()">
+        <div class="form-group">
+          <input type="text" formControlName="name">
+          <p class="login-message" [ngClass]="userForm.controls.name.errors && (userForm.controls.name.dirty || userForm.controls.name.touched) ? 'login-message--error' : 'login-message--success'" *ngIf="userForm.controls.name.errors && (userForm.controls.name.dirty || userForm.controls.name.touched)">This is a required field</p>
+        </div>
+        <div class="form-group">
+          <input type="password" formControlName="password">
+          <p class="login-message" [ngClass]="userForm.controls.password.errors && (userForm.controls.password.dirty || userForm.controls.password.touched) ? 'login-message--error' : 'login-message--success'" *ngIf="userForm.controls.password.errors && (userForm.controls.password.dirty || userForm.controls.password.touched)">This is a required field</p>
+        </div>
+        <p *ngIf="showMessage" class="login-message" [ngClass]="userForm.valid && userIsLoaded ? 'login-message--success' : 'login-message--error'">{{ userForm.valid && userIsLoaded ? successMessage : errorMessage }}</p>
+        <button type="submit">Submit</button>
+      </form>
+    </div>
   </div>
   <user [user]="user" [userIsLoaded]="userIsLoaded" (onLoadUsers)="usersLoaded($event)" (onLogout)="logout()"></user>
 </div>

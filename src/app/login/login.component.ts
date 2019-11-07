@@ -24,6 +24,11 @@ export class LoginComponent implements OnInit {
       name: new FormControl('', Validators.required),
       password: new FormControl('', [Validators.required, Validators.minLength(4)])
     })
+
+    this.userForm.valueChanges
+      .subscribe((valueChanges) => {
+        console.log('valueChanges', valueChanges)
+      })
   }
 
   usersLoaded (users: User[]) {
@@ -43,6 +48,8 @@ export class LoginComponent implements OnInit {
   onSubmitted () {
     console.log('this.userForm', this.userForm)
     this.showMessage = true
+    console.log('this.showMessage', this.showMessage)
+    this.userIsLoaded = false
     if (!this.userForm.valid) return
     const form: User = this.userForm.value
     this.userIsLoaded = this.LoginService.login(form)

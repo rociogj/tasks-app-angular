@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges, Input, Output, EventEmitter } from '@angular/core'
+import { Component, OnInit, OnChanges, Input, Output, EventEmitter, ViewChild } from '@angular/core'
 import { FormGroup, FormControl } from '@angular/forms'
 import { User } from 'src/models/user.model'
 import userData from 'src/assets/users.json'
@@ -13,9 +13,9 @@ export class UserComponent implements OnInit {
   @Input() users: User[]
   tableIsVisible: boolean = true
   searchForm: FormControl
-  newUser: FormGroup
+  newUser = new User('', '')
   
-  @Input() user: Object
+  @Input() user: User
   @Input() userIsLoaded: boolean
   @Output() onLoadUsers: EventEmitter<User[]> = new EventEmitter<User[]>()
   @Output() onLogout: EventEmitter<any> = new EventEmitter<any>()
@@ -27,13 +27,6 @@ export class UserComponent implements OnInit {
     this.users = this.UsersService.getUsers()
 
     this.searchForm = new FormControl()
-
-    this.newUser = new FormGroup({
-      name: new FormControl(),
-      email: new FormControl()
-    })
-
-    console.log('this.users', this.users)
   }
 
   ngOnChanges () {
@@ -54,7 +47,8 @@ export class UserComponent implements OnInit {
   }
 
   addItem () {
-    const newUser : User = {...this.newUser.value, id: userData.length + 1, password: ''}
+    console.log('this.newUser', this.newUser)
+    const newUser : User = {...this.newUser, id: userData.length + 1, password: ''}
     this.users.push(newUser)
   }
 }

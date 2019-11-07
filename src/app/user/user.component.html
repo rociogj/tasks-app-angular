@@ -9,10 +9,10 @@
     <input type="text" [formControl]="searchForm">
   </div>
   
-  <form [formGroup]="newUser">
-    <input type="text" formControlName="name">
-    <input type="text" formControlName="email">
-    <button (click)="addItem()">Add</button>
+  <form #f="ngForm" name="userForm" (ngSubmit)="addItem()">
+    <input type="text" name="name" [(ngModel)]="newUser.name" #name="ngModel">
+    <input type="text" name="email" [(ngModel)]="newUser.email" #email="ngModel">
+    <button type="submit">Add</button>
   </form>
   <table *ngIf="tableIsVisible">
     <thead>
